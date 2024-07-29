@@ -1,4 +1,5 @@
 import { useHelper } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import {
 	BoxGeometry,
@@ -12,11 +13,12 @@ import {
 	SkinnedMesh,
 	SkeletonHelper,
 } from 'three';
+import { degToRad } from 'three/src/math/MathUtils.js';
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.73; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
-const PAGE_SEGMENTS = 5; // NUmber of bones
+const PAGE_SEGMENTS = 30; // NUmber of bones
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
 const pageGeometry = new BoxGeometry(
@@ -98,7 +100,14 @@ export default function Page({ number, front, back, ...props }) {
 		return mesh;
 	}, []);
 
-	useHelper(skinnedMeshRef, SkeletonHelper, 'red');
+	// useHelper(skinnedMeshRef, SkeletonHelper, 'red');
+
+	useFrame((state, delta) => {
+		if (!skinnedMeshRef.current) {
+			return;
+		}
+		const bones = skinnedMeshRef.current.skeleton.bones;
+	});
 
 	return (
 		<group {...props} ref={group}>

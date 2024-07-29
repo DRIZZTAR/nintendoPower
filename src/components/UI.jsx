@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai';
 
-const pictures = [
+export const pictures = [
 	'DSC00680',
 	'DSC00933',
 	'DSC00966',
