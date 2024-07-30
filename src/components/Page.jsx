@@ -103,6 +103,8 @@ export default function Page({
 	picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
 
 	const group = useRef();
+  const turnedAt = useRef(0);
+  const lastOpened = useRef(opened);
 
 	const skinnedMeshRef = useRef();
 
@@ -164,6 +166,15 @@ export default function Page({
 			return;
 		}
 
+    if (lastOpened.current !== opened) {
+      turnedAt.current = +new Date();
+      lastOpened.current = opened;
+    }
+
+    // Calculate the turning time
+    let turningTime = Math.min(400, new Date() - turnedAt.current) / 400;
+    turningTime = Math.sin(turningTime * Math.PI);
+
 		let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
 		if (!bookClosed) {
 			targetRotation += degToRad(number * 0.8);
@@ -180,14 +191,15 @@ export default function Page({
       const outsideCurveIntensity = i >= 8 ? Math.cos(i * 0.3 + 0.09) : 0;
 
       // Calculate the intensity of the turning curve
-      const turningCurveIntensity = Math.sin(i * 0.2 + 0.25);
+      const turningIntensity = Math.sin(i * Math.PI * (1 - bones.length)) * turningTime;
 
 
 
       // Rotate the bones and curve of pages
 			let rotationAngle =
 				insideCurveStrength * insideCurveIntensity * targetRotation -
-        outsideCurveStrength * outsideCurveIntensity * targetRotation;
+        outsideCurveStrength * outsideCurveIntensity * targetRotation +
+        turningCurveStrentgh * turningIntensity * targetRotation;
       if (bookClosed) {
         if(i === 0 ) {
           rotationAngle = targetRotation;
