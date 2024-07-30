@@ -30,10 +30,10 @@ export const Book = ({ ...props }) => {
 					}
 				}
 			});
-			goToPage();
-			return () => {
-				clearTimeout(timeout);
-			};
+		};
+		goToPage();
+		return () => {
+			clearTimeout(timeout);
 		};
 	}, [page]);
 
@@ -42,11 +42,13 @@ export const Book = ({ ...props }) => {
 			{pages.map((pageData, index) => (
 				<Page
 					key={index}
-					page={page}
+					page={delayedPage}
 					number={index}
+					opened={delayedPage > index}
+					bookClosed={
+						delayedPage === 0 || delayedPage === pages.length
+					}
 					{...pageData}
-					opened={page > index}
-					bookClosed={page === 0 || page === pages.length}
 				/>
 			))}
 		</group>

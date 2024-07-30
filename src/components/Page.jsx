@@ -1,6 +1,6 @@
-import { useHelper, useTexture } from '@react-three/drei';
+import { useCursor, useHelper, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
 	BoxGeometry,
 	Vector3,
@@ -15,8 +15,9 @@ import {
 	SRGBColorSpace,
 } from 'three';
 import { degToRad, MathUtils } from 'three/src/math/MathUtils.js';
-import { pages } from './UI.jsx';
+import { pages, pageAtom } from './UI.jsx';
 import { easing } from 'maath';
+import { useAtom } from 'jotai';
 
 // Constants
 
@@ -70,6 +71,7 @@ pageGeometry.setAttribute(
 );
 
 const whiteColor = new Color('white');
+const emissiveColor = new Color('orange');
 
 const pageMaterials = [
 	new MeshStandardMaterial({ color: whiteColor }),
@@ -138,6 +140,8 @@ export default function Page({
 					: {
 							roughness: 0.1,
 					  }),
+				emissive: emissiveColor,
+				emissiveIntensity: 0,
 			}),
 			new MeshStandardMaterial({
 				color: whiteColor,
@@ -149,6 +153,8 @@ export default function Page({
 					: {
 							roughness: 0.1,
 					  }),
+				emissive: emissiveColor,
+				emissiveIntensity: 0,
 			}),
 		];
 		const mesh = new SkinnedMesh(pageGeometry, materials);
@@ -167,6 +173,15 @@ export default function Page({
 			return;
 		}
 
+    // Controls the emissive intensity of highlighted pages
+    const emissiveIntensity = highlighted ? 0.22 : 0;
+    skinnedMeshRef.current.material[4].emissiveIntensity = 
+    skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
+      skinnedMeshRef.current.material[4].emissiveIntensity,
+      emissiveIntensity,
+      0.1
+    );
+
 		if (lastOpened.current !== opened) {
 			turnedAt.current = +new Date();
 			lastOpened.current = opened;
@@ -181,6 +196,7 @@ export default function Page({
 			targetRotation += degToRad(number * 0.8);
 		}
 
+		// Rotate the bones
 		const bones = skinnedMeshRef.current.skeleton.bones;
 		for (let i = 0; i < bones.length; i++) {
 			const target = i === 0 ? group.current : bones[i];
@@ -208,7 +224,7 @@ export default function Page({
 				} else {
 					rotationAngle = 0;
 				}
-			}
+			} 
 			easing.dampAngle(
 				target.rotation,
 				'y',
@@ -231,8 +247,28 @@ export default function Page({
 		}
 	});
 
+	const [_, setPage] = useAtom(pageAtom);
+	const [highlighted, setHighlighted] = useState(false);
+	useCursor(highlighted);
+
 	return (
-		<group {...props} ref={group}>
+		<group
+			{...props}
+			ref={group}
+			onPointerEnter={e => {
+				e.stopPropagation();
+				setHighlighted(true);
+			}}
+			onPointerLeave={e => {
+				e.stopPropagation();
+				setHighlighted(false);
+			}}
+			onClick={e => {
+				e.stopPropagation();
+				setPage(opened ? number : number + 1);
+				setHighlighted(false);
+			}}
+		>
 			<primitive
 				object={manualSkinnedMesh}
 				ref={skinnedMeshRef}
