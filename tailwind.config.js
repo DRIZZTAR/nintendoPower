@@ -14,7 +14,7 @@ export default {
 				'13xl': '13rem',
 			},
 			animation: {
-				'horizontal-scroll': 'horizontal-scroll linear 16s infinite ',
+				'horizontal-scroll': 'horizontal-scroll linear 32s infinite ',
 				'horizontal-scroll-2':
 					'horizontal-scroll-2 linear 16s infinite ',
 			},
