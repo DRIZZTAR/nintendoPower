@@ -21,7 +21,7 @@ pages.push({
 	back: 'back',
 });
 
-export const UI = () => {
+export const UI = ({ toggleEnvironment, showEnvironment }) => {
 	const [page, setPage] = useAtom(pageAtom);
 	const [menuOpen, setMenuOpen] = useState(false);
 
@@ -62,7 +62,11 @@ export const UI = () => {
 				<div className='p-5 pointer-events-auto'>
 					<h1 className='text-5xl font-light'>BATMAN, 2011</h1>
 					<p className='text-3xl font-light'>issue #O1</p>
-					<a className='text-red-900 font-medium' href='https://www.TysonSkakun.dev' target='_blank'>
+					<a
+						className='text-red-900 font-medium'
+						href='https://www.TysonSkakun.dev'
+						target='_blank'
+					>
 						TysonSkakun.Dev
 					</a>
 				</div>
@@ -98,7 +102,7 @@ export const UI = () => {
 			<div className='fixed inset-0 flex items-center -rotate-12 select-none'>
 				<div className='relative'>
 					<div className='bg-white/0 animate-horizontal-scroll flex items-center gap-8 w-max px-8'>
-						<h1 className='shrink-0 text-white text-10xl font-light  '>
+						<h1 className='shrink-0 text-white text-10xl font-light'>
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
@@ -118,7 +122,7 @@ export const UI = () => {
 						</h2>
 					</div>
 					<div className='absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max'>
-						<h1 className='shrink-0 text-white text-10xl font-light  '>
+						<h1 className='shrink-0 text-white text-10xl font-light'>
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
