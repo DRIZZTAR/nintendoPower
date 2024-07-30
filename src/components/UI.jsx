@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 export const pageAtom = atom(0);
 export const pages = [
 	{
-		front: 'book-cover',
+		front: 'bman',
 		back: pictures[0],
 	},
 ];
@@ -34,10 +34,11 @@ export const UI = () => {
 		<>
 			<main className=' pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col'>
 				<a
-					className='pointer-events-auto mt-10 ml-10'
-					href='https://lessons.wawasensei.dev/courses/react-three-fiber'
+					className='pointer-events-auto mt-10 ml-10 text-red-500 text-2xl uppercase font-thin'
+					href='https://www.tysonskakun.dev'
+          target="_blank"
 				>
-					<img className='w-20' src='/images/wawasensei-white.png' />
+					TysonSkakun.dev
 				</a>
 				<div className='w-full overflow-auto pointer-events-auto flex justify-center'>
 					<div className='overflow-auto flex items-center gap-4 max-w-full p-10'>
@@ -76,22 +77,22 @@ export const UI = () => {
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							React Three Fiber
+							Now
 						</h2>
 						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Three.js
+							Youre
 						</h2>
 						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Ultimate Guide
+							Playing
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							Tutorials
+							With
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-extralight italic'>
-							Learn
+							Power
 						</h2>
 						<h2 className='shrink-0 text-white text-13xl font-bold'>
-							Practice
+							NINTENDO POWER
 						</h2>
 						<h2 className='shrink-0 text-transparent text-13xl font-bold outline-text italic'>
 							Creative
@@ -102,22 +103,22 @@ export const UI = () => {
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							React Three Fiber
+							Now
 						</h2>
 						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Three.js
+							Your
 						</h2>
 						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Ultimate Guide
+							Playing
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							Tutorials
+							With
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-extralight italic'>
-							Learn
+							Power
 						</h2>
 						<h2 className='shrink-0 text-white text-13xl font-bold'>
-							Practice
+							NINTENDO POWER
 						</h2>
 						<h2 className='shrink-0 text-transparent text-13xl font-bold outline-text italic'>
 							Creative

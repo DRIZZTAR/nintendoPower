@@ -84,7 +84,7 @@ const pageMaterials = [
 pages.forEach(page => {
 	useTexture.preload(`/textures/${page.front}.jpg`);
 	useTexture.preload(`/textures/${page.back}.jpg`);
-	useTexture.preload(`/textures/book-cover-roughness.jpg`);
+	useTexture.preload(`/textures/bman.jpg`);
 });
 
 export default function Page({
@@ -100,7 +100,7 @@ export default function Page({
 		`/textures/${front}.jpg`,
 		`/textures/${back}.jpg`,
 		...(number === 0 || number === pages.length - 1
-			? [`/textures/book-cover-roughness.jpg`]
+			? [`/textures/bman.jpg`]
 			: []),
 	]);
 
