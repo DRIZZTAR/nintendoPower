@@ -157,7 +157,7 @@ export const UI = () => {
 							target='_blank'
 							rel='noopener noreferrer'
 						>
-							HireMe
+							Hire Me
 						</a>
 					</div>
 					<div className='menu-item font-bold'>Issues</div>
