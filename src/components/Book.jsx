@@ -1,19 +1,21 @@
+import { useAtom } from 'jotai';
 import Page from './Page';
-import { pages } from './UI';
+import { pages, pageAtom } from './UI';
 
 export const Book = ({ ...props }) => {
+	const [page] = useAtom(pageAtom);
+
 	return (
-		<group {...props}>
-			{pages.map((pageData, index) =>
-				index === 0 ? (
-					<Page
-						position-x={index * 0.15}
-						key={index}
-						number={index}
-						{...pageData}
-					/>
-				) : null
-			)}
+		<group {...props} rotation-y={-Math.PI / 2}>
+			{pages.map((pageData, index) => (
+				<Page
+					key={index}
+					page={page}
+					number={index}
+					{...pageData}
+					opened={page > index}
+				/>
+			))}
 		</group>
 	);
 };

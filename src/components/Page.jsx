@@ -1,4 +1,4 @@
-import { useHelper } from '@react-three/drei';
+import { useHelper, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import {
@@ -12,8 +12,10 @@ import {
 	Skeleton,
 	SkinnedMesh,
 	SkeletonHelper,
+	SRGBColorSpace,
 } from 'three';
 import { degToRad } from 'three/src/math/MathUtils.js';
+import { pages } from './UI.jsx';
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.73; // 4:3 aspect ratio
@@ -65,10 +67,25 @@ const pageMaterials = [
 	new MeshStandardMaterial({ color: '#111' }),
 	new MeshStandardMaterial({ color: whiteColor }),
 	new MeshStandardMaterial({ color: whiteColor }),
-	new MeshStandardMaterial({ color: 'pink' }),
-	new MeshStandardMaterial({ color: 'blue' }),
 ];
-export default function Page({ number, front, back, ...props }) {
+
+pages.forEach(page => {
+	useTexture.preload(`/textures/${page.front}.jpg`);
+	useTexture.preload(`/textures/${page.back}.jpg`);
+	useTexture.preload(`/textures/book-cover-roughness.jpg`);
+});
+
+export default function Page({ number, front, back, page, opened, ...props }) {
+	const [picture, picture2, pictureRoughness] = useTexture([
+		`/textures/${front}.jpg`,
+		`/textures/${back}.jpg`,
+		...(number === 0 || number === pages.length - 1
+			? [`/textures/book-cover-roughness.jpg`]
+			: []),
+	]);
+
+	picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
+
 	const group = useRef();
 
 	const skinnedMeshRef = useRef();
@@ -90,7 +107,31 @@ export default function Page({ number, front, back, ...props }) {
 
 		const skeleton = new Skeleton(bones);
 
-		const materials = pageMaterials;
+		const materials = [
+			...pageMaterials,
+			new MeshStandardMaterial({
+				color: whiteColor,
+				map: picture,
+				...(number === 0
+					? {
+							roughnessMap: pictureRoughness,
+					  }
+					: {
+							roughness: 0.1,
+					  }),
+			}),
+			new MeshStandardMaterial({
+				color: whiteColor,
+				map: picture2,
+				...(number === pages.length - 1
+					? {
+							roughnessMap: pictureRoughness,
+					  }
+					: {
+							roughness: 0.1,
+					  }),
+			}),
+		];
 		const mesh = new SkinnedMesh(pageGeometry, materials);
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
@@ -106,12 +147,21 @@ export default function Page({ number, front, back, ...props }) {
 		if (!skinnedMeshRef.current) {
 			return;
 		}
+
+		let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
+    targetRotation += degToRad(number * 0.8);
+
 		const bones = skinnedMeshRef.current.skeleton.bones;
+    bones[0].rotation.y = targetRotation; 
 	});
 
 	return (
 		<group {...props} ref={group}>
-			<primitive object={manualSkinnedMesh} ref={skinnedMeshRef} />
+			<primitive
+				object={manualSkinnedMesh}
+				ref={skinnedMeshRef}
+				position-z={-number * PAGE_DEPTH + page * PAGE_DEPTH}
+			/>
 		</group>
 	);
 }
