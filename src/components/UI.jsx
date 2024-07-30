@@ -59,15 +59,15 @@ export const UI = () => {
 	return (
 		<>
 			<main className='pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col'>
-				<a
-					className='pointer-events-auto mt-10 ml-10 text-red-500 text-2xl uppercase font-extralight'
-					href='https://www.tysonskakun.dev'
-					target='_blank'
-				>
-					TysonSkakun.dev
-				</a>
+				<div className='p-5 pointer-events-auto'>
+					<h1 className='text-5xl font-light'>BATMAN, 2011</h1>
+					<p className='text-3xl font-light'>issue #O1</p>
+					<a className='text-red-900 font-medium' href='https://www.TysonSkakun.dev' target='_blank'>
+						TysonSkakun.Dev
+					</a>
+				</div>
 				<div className='w-full overflow-auto pointer-events-auto flex justify-center'>
-					<div className='overflow-auto flex items-center gap-4 max-w-full p-10'>
+					<div className='overflow-auto flex items-center gap-4 max-w-full p-5'>
 						{[...pages].map((_, index) => (
 							<button
 								key={index}
