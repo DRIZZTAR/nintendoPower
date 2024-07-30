@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 export const pageAtom = atom(0);
 export const pages = [
 	{
-		front: 'bman',
+		front: 'cover',
 		back: pictures[0],
 	},
 ];
