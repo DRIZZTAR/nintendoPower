@@ -20,7 +20,8 @@ import { easing } from 'maath';
 
 // Constants
 
-const easingFactor = 0.5;
+const easingFactor = 0.5; // Y axis
+const easingFactorFold = 0.3; // X axis
 const insideCurveStrength = 0.18;
 const outsideCurveStrength = 0.05;
 const turningCurveStrentgh = 0.09;
@@ -103,8 +104,8 @@ export default function Page({
 	picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
 
 	const group = useRef();
-  const turnedAt = useRef(0);
-  const lastOpened = useRef(opened);
+	const turnedAt = useRef(0);
+	const lastOpened = useRef(opened);
 
 	const skinnedMeshRef = useRef();
 
@@ -166,14 +167,14 @@ export default function Page({
 			return;
 		}
 
-    if (lastOpened.current !== opened) {
-      turnedAt.current = +new Date();
-      lastOpened.current = opened;
-    }
+		if (lastOpened.current !== opened) {
+			turnedAt.current = +new Date();
+			lastOpened.current = opened;
+		}
 
-    // Calculate the turning time
-    let turningTime = Math.min(400, new Date() - turnedAt.current) / 400;
-    turningTime = Math.sin(turningTime * Math.PI);
+		// Calculate the turning time
+		let turningTime = Math.min(400, new Date() - turnedAt.current) / 400;
+		turningTime = Math.sin(turningTime * Math.PI);
 
 		let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
 		if (!bookClosed) {
@@ -184,34 +185,47 @@ export default function Page({
 		for (let i = 0; i < bones.length; i++) {
 			const target = i === 0 ? group.current : bones[i];
 
-      // Calculate the intensity of the inside curve
+			// Calculate the intensity of the inside curve
 			const insideCurveIntensity = i < 8 ? Math.sin(i * 0.2 + 0.25) : 0;
 
-      // Calculate the intensity of the outside curve
-      const outsideCurveIntensity = i >= 8 ? Math.cos(i * 0.3 + 0.09) : 0;
+			// Calculate the intensity of the outside curve
+			const outsideCurveIntensity = i >= 8 ? Math.cos(i * 0.3 + 0.09) : 0;
 
-      // Calculate the intensity of the turning curve
-      const turningIntensity = Math.sin(i * Math.PI * (1 - bones.length)) * turningTime;
+			// Calculate the intensity of the turning curve
+			const turningIntensity =
+				Math.sin(i * Math.PI * (1 - bones.length)) * turningTime;
 
-
-
-      // Rotate the bones and curve of pages
+			// Rotate the bones and curve of pages
 			let rotationAngle =
 				insideCurveStrength * insideCurveIntensity * targetRotation -
-        outsideCurveStrength * outsideCurveIntensity * targetRotation +
-        turningCurveStrentgh * turningIntensity * targetRotation;
-      if (bookClosed) {
-        if(i === 0 ) {
-          rotationAngle = targetRotation;
-        } else {
-          rotationAngle = 0;
-        }
-      }
+				outsideCurveStrength * outsideCurveIntensity * targetRotation +
+				turningCurveStrentgh * turningIntensity * targetRotation;
+			let foldRotationAngle = degToRad(Math.sign(targetRotation) * 2);
+			if (bookClosed) {
+				if (i === 0) {
+					rotationAngle = targetRotation;
+					foldRotationAngle = 0;
+				} else {
+					rotationAngle = 0;
+				}
+			}
 			easing.dampAngle(
 				target.rotation,
 				'y',
 				rotationAngle,
 				easingFactor,
+				delta
+			);
+			const foldIntensity =
+				i > 8
+					? Math.sin(i * Math.PI * (1 / bones.length) - 0.5) *
+					  turningTime
+					: 0;
+			easing.dampAngle(
+				target.rotation,
+				'x',
+				foldRotationAngle * foldIntensity,
+				easingFactorFold,
 				delta
 			);
 		}
