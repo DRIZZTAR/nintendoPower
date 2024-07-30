@@ -1,5 +1,6 @@
 import { atom, useAtom } from 'jotai';
 import { pictures } from './bookData.js';
+import { useEffect } from 'react';
 
 
 export const pageAtom = atom(0);
@@ -23,6 +24,11 @@ pages.push({
 
 export const UI = () => {
 	const [page, setPage] = useAtom(pageAtom);
+
+  useEffect(() => {
+    const audio = new Audio("/audios/page-flip-01a.mp3");
+    audio.play();
+  }, [page]);
 
 	return (
 		<>
@@ -62,13 +68,12 @@ export const UI = () => {
 				</div>
 			</main>
 
-
-      {/*Scrolling Background Text */}
-			<div className='fixed inset-0 flex items-center -rotate-2 select-none hidden'>
+			{/*Scrolling Background Text */}
+			<div className='fixed inset-0 flex items-center -rotate-2 select-none'>
 				<div className='relative'>
 					<div className='bg-white/0  animate-horizontal-scroll flex items-center gap-8 w-max px-8'>
 						<h1 className='shrink-0 text-white text-10xl font-black '>
-							Wawa Sensei
+							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
 							React Three Fiber

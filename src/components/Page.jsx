@@ -26,6 +26,10 @@ const easingFactorFold = 0.3; // X axis
 const insideCurveStrength = 0.18;
 const outsideCurveStrength = 0.05;
 const turningCurveStrentgh = 0.09;
+const emissiveIntensityPower = 0.22;
+
+const whiteColor = new Color('white');
+const emissiveColor = new Color('orange');
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.73; // 4:3 aspect ratio
@@ -69,9 +73,6 @@ pageGeometry.setAttribute(
 	'skinWeight',
 	new Float32BufferAttribute(skinWeights, 4)
 );
-
-const whiteColor = new Color('white');
-const emissiveColor = new Color('orange');
 
 const pageMaterials = [
 	new MeshStandardMaterial({ color: whiteColor }),
@@ -173,14 +174,15 @@ export default function Page({
 			return;
 		}
 
-    // Controls the emissive intensity of highlighted pages
-    const emissiveIntensity = highlighted ? 0.22 : 0;
-    skinnedMeshRef.current.material[4].emissiveIntensity = 
-    skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
-      skinnedMeshRef.current.material[4].emissiveIntensity,
-      emissiveIntensity,
-      0.1
-    );
+		// Controls the emissive intensity of highlighted pages
+		const emissiveIntensity = highlighted ? emissiveIntensityPower : 0;
+		skinnedMeshRef.current.material[4].emissiveIntensity =
+			skinnedMeshRef.current.material[5].emissiveIntensity =
+				MathUtils.lerp(
+					skinnedMeshRef.current.material[4].emissiveIntensity,
+					emissiveIntensity,
+					0.1
+				);
 
 		if (lastOpened.current !== opened) {
 			turnedAt.current = +new Date();
@@ -224,7 +226,7 @@ export default function Page({
 				} else {
 					rotationAngle = 0;
 				}
-			} 
+			}
 			easing.dampAngle(
 				target.rotation,
 				'y',
