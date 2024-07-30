@@ -12,7 +12,7 @@ export const Experience = () => {
 				<Book />
 			</Float>
 			<OrbitControls />
-			<Environment background preset='city' />
+			<Environment  preset='city' />
 			<directionalLight
 				position={[2, 5, 2]}
 				intensity={2.5}
@@ -23,7 +23,7 @@ export const Experience = () => {
 			/>
 			<mesh position-y={-1.5} rotation-x={-Math.PI / 2} receiveShadow>
 				<planeGeometry args={[100, 100]} />
-				<shadowMaterial transparent opacity={0.2} />
+				<shadowMaterial transparent opacity={0.5} />
 			</mesh>
 		</>
 	);
