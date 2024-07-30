@@ -18,7 +18,7 @@ for (let i = 1; i < pictures.length - 1; i += 2) {
 
 pages.push({
 	front: pictures[pictures.length - 1],
-	back: 'book-back',
+	back: 'back',
 });
 
 export const UI = () => {
@@ -98,55 +98,43 @@ export const UI = () => {
 			<div className='fixed inset-0 flex items-center -rotate-12 select-none'>
 				<div className='relative'>
 					<div className='bg-white/0 animate-horizontal-scroll flex items-center gap-8 w-max px-8'>
-						<h1 className='shrink-0 text-white text-10xl font-black '>
+						<h1 className='shrink-0 text-white text-10xl font-light  '>
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							Now
-						</h2>
-						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Youre
+							Build
 						</h2>
 						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Playing
+							Something
+						</h2>
+						<h2 className='shrink-0 text-white text-12xl font-bold'>
+							Different
+						</h2>
+						<h2 className='shrink-0 text-white text-9xl font-light italic'>
+							Get
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							With
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-extralight italic'>
-							Power
-						</h2>
-						<h2 className='shrink-0 text-white text-13xl font-bold'>
-							NINTENDO POWER
-						</h2>
-						<h2 className='shrink-0 text-transparent text-13xl font-bold outline-text italic'>
-							Creative
+							UP
 						</h2>
 					</div>
 					<div className='absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max'>
-						<h1 className='shrink-0 text-white text-10xl font-black '>
+						<h1 className='shrink-0 text-white text-10xl font-light  '>
 							Tyson Skakun
 						</h1>
 						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							Now
-						</h2>
-						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Your
+							Build
 						</h2>
 						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Playing
+							Something
+						</h2>
+						<h2 className='shrink-0 text-white text-12xl font-bold'>
+							Different
+						</h2>
+						<h2 className='shrink-0 text-white text-9xl font-light italic'>
+							Get
 						</h2>
 						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							With
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-extralight italic'>
-							Power
-						</h2>
-						<h2 className='shrink-0 text-white text-13xl font-bold'>
-							NINTENDO POWER
-						</h2>
-						<h2 className='shrink-0 text-transparent text-13xl font-bold outline-text italic'>
-							Creative
+							UP
 						</h2>
 					</div>
 				</div>
@@ -162,7 +150,7 @@ export const UI = () => {
 			</div>
 			<div className={`menu ${menuOpen ? 'active' : ''}`}>
 				<div className='menu-close' onClick={closeMenu}></div>
-				<div className='menu-content'>
+				<div className='menu-content p-10'>
 					<div className='menu-item font-extrabold'>
 						<a
 							href='https://www.linkedin.com/in/tyson-skakun-tail/'

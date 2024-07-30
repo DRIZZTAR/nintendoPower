@@ -16,7 +16,7 @@ export default {
 			animation: {
 				'horizontal-scroll': 'horizontal-scroll linear 32s infinite ',
 				'horizontal-scroll-2':
-					'horizontal-scroll-2 linear 16s infinite ',
+					'horizontal-scroll-2 linear 32s infinite ',
 			},
 			keyframes: {
 				'horizontal-scroll': {
