@@ -14,6 +14,7 @@ export const Book = ({ ...props }) => {
 					number={index}
 					{...pageData}
 					opened={page > index}
+          bookClosed={page === 0 || page === pages.length}
 				/>
 			))}
 		</group>

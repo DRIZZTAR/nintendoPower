@@ -14,8 +14,16 @@ import {
 	SkeletonHelper,
 	SRGBColorSpace,
 } from 'three';
-import { degToRad } from 'three/src/math/MathUtils.js';
+import { degToRad, MathUtils } from 'three/src/math/MathUtils.js';
 import { pages } from './UI.jsx';
+import { easing } from 'maath';
+
+// Constants
+
+const easingFactor = 0.5;
+const insideCurveStrength = 0.18;
+const outsideCurveStrength = 0.05;
+const turningCurveStrentgh = 0.09;
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.73; // 4:3 aspect ratio
@@ -75,7 +83,15 @@ pages.forEach(page => {
 	useTexture.preload(`/textures/book-cover-roughness.jpg`);
 });
 
-export default function Page({ number, front, back, page, opened, ...props }) {
+export default function Page({
+	number,
+	front,
+	back,
+	page,
+	opened,
+	bookClosed,
+	...props
+}) {
 	const [picture, picture2, pictureRoughness] = useTexture([
 		`/textures/${front}.jpg`,
 		`/textures/${back}.jpg`,
@@ -143,16 +159,50 @@ export default function Page({ number, front, back, page, opened, ...props }) {
 
 	// useHelper(skinnedMeshRef, SkeletonHelper, 'red');
 
-	useFrame((state, delta) => {
+	useFrame((_, delta) => {
 		if (!skinnedMeshRef.current) {
 			return;
 		}
 
 		let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
-    targetRotation += degToRad(number * 0.8);
+		if (!bookClosed) {
+			targetRotation += degToRad(number * 0.8);
+		}
 
 		const bones = skinnedMeshRef.current.skeleton.bones;
-    bones[0].rotation.y = targetRotation; 
+		for (let i = 0; i < bones.length; i++) {
+			const target = i === 0 ? group.current : bones[i];
+
+      // Calculate the intensity of the inside curve
+			const insideCurveIntensity = i < 8 ? Math.sin(i * 0.2 + 0.25) : 0;
+
+      // Calculate the intensity of the outside curve
+      const outsideCurveIntensity = i >= 8 ? Math.cos(i * 0.3 + 0.09) : 0;
+
+      // Calculate the intensity of the turning curve
+      const turningCurveIntensity = Math.sin(i * 0.2 + 0.25);
+
+
+
+      // Rotate the bones and curve of pages
+			let rotationAngle =
+				insideCurveStrength * insideCurveIntensity * targetRotation -
+        outsideCurveStrength * outsideCurveIntensity * targetRotation;
+      if (bookClosed) {
+        if(i === 0 ) {
+          rotationAngle = targetRotation;
+        } else {
+          rotationAngle = 0;
+        }
+      }
+			easing.dampAngle(
+				target.rotation,
+				'y',
+				rotationAngle,
+				easingFactor,
+				delta
+			);
+		}
 	});
 
 	return (
