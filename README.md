@@ -7,8 +7,3 @@
 ## Live Demo
 
 Check out the [live demo](https://batman-omega.vercel.app/) of the project.
-
-## Final Code
-
-The final code is available on GitHub:
-[Final code](https://github.com/DRIZZTAR/nintendoPower)
