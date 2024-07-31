@@ -26,7 +26,8 @@ const easingFactorFold = 0.3; // X axis
 const insideCurveStrength = 0.18;
 const outsideCurveStrength = 0.05;
 const turningCurveStrentgh = 0.09;
-const emissiveIntensityPower = 0.22;
+const emissiveIntensityPower = 0.1;
+const openedPageSpread = 1.5;
 
 const whiteColor = new Color('white');
 const emissiveColor = new Color('orange');
@@ -154,6 +155,7 @@ export default function Page({
 					: {
 							roughness: 0.1,
 							metalness: 0.2,
+
 					  }),
 				emissive: emissiveColor,
 				emissiveIntensity: 0,
@@ -196,7 +198,7 @@ export default function Page({
 
 		let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
 		if (!bookClosed) {
-			targetRotation += degToRad(number * 0.8);
+			targetRotation += degToRad(number * openedPageSpread); // page spread
 		}
 
 		// Rotate the bones
