@@ -4,22 +4,38 @@ import { useEffect, useState } from 'react';
 import ScrollingText from './ScrollingText.jsx';
 
 export const pageAtom = atom(0);
+// Function to determine if a page should be a web page
+const isWebPage = (index) => {
+  // Example: Make every 5th page a web page
+  return (index % 5 === 0 && index !== 0 && index !== pictures.length - 1);
+};
+
+// Function to get web URL for a page
+const getWebUrl = (index) => {
+  // Example: Rotate through a set of URLs
+  const urls = ['https://www.tysonskakun.dev'];
+  return urls[index % urls.length];
+};
+
 export const pages = [
-	{
-		front: 'cover',
-		back: pictures[0],
-	},
+  {
+    front: 'cover',
+    back: pictures[0],
+  },
 ];
+
 for (let i = 1; i < pictures.length - 1; i += 2) {
-	pages.push({
-		front: pictures[i % pictures.length],
-		back: pictures[(i + 1) % pictures.length],
-	});
+  pages.push({
+    front: pictures[i % pictures.length],
+    back: pictures[(i + 1) % pictures.length],
+    isWebPage: isWebPage(i),
+    webUrl: isWebPage(i) ? getWebUrl(i) : undefined,
+  });
 }
 
 pages.push({
-	front: pictures[pictures.length - 1],
-	back: 'back',
+  front: pictures[pictures.length - 1],
+  back: 'back',
 });
 
 export const UI = ({ toggleEnvironment, showEnvironment }) => {
