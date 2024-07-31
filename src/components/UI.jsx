@@ -1,6 +1,7 @@
 import { atom, useAtom } from 'jotai';
 import { pictures } from './bookData.js';
 import { useEffect, useState } from 'react';
+import ScrollingText from './ScrollingText.jsx';
 
 export const pageAtom = atom(0);
 export const pages = [
@@ -60,8 +61,10 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 		<>
 			<main className='pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col'>
 				<div className='p-5 pointer-events-auto'>
-					<h1 className='text-5xl font-light'>BATMAN, 2011</h1>
-					<p className='text-3xl font-light'>issue #O1</p>
+					<h1 className='text-5xl font-light'>
+						BATMAN <span className='text-xl'>2011</span>
+					</h1>
+					<p className='text-3xl font-light'>issue #01</p>
 					<a
 						className='text-red-900 font-medium'
 						href='https://www.TysonSkakun.dev'
@@ -99,51 +102,7 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 				</div>
 			</main>
 
-			<div className='fixed inset-0 flex items-center -rotate-12 select-none'>
-				<div className='relative'>
-					<div className='bg-white/0 animate-horizontal-scroll flex items-center gap-8 w-max px-8'>
-						<h1 className='shrink-0 text-white text-10xl font-light'>
-							Tyson Skakun
-						</h1>
-						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							Build
-						</h2>
-						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Something
-						</h2>
-						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Different
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-light italic'>
-							Get
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							UP
-						</h2>
-					</div>
-					<div className='absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max'>
-						<h1 className='shrink-0 text-white text-10xl font-light'>
-							Tyson Skakun
-						</h1>
-						<h2 className='shrink-0 text-white text-8xl italic font-light'>
-							Build
-						</h2>
-						<h2 className='shrink-0 text-transparent text-12xl font-bold italic outline-text'>
-							Something
-						</h2>
-						<h2 className='shrink-0 text-white text-12xl font-bold'>
-							Different
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-light italic'>
-							Get
-						</h2>
-						<h2 className='shrink-0 text-white text-9xl font-medium'>
-							UP
-						</h2>
-					</div>
-				</div>
-			</div>
-
+			{/* <ScrollingText /> */}
 			<div
 				className={`hamburger ${menuOpen ? 'active' : ''}`}
 				onClick={toggleMenu}
