@@ -31,7 +31,7 @@ const emissiveIntensityPower = 0.22;
 const whiteColor = new Color('white');
 const emissiveColor = new Color('orange');
 
-const PAGE_WIDTH = 1.28;
+const PAGE_WIDTH = 1.28; // 4:3 aspect ratio
 const PAGE_HEIGHT = 1.73; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
 const PAGE_SEGMENTS = 30; // NUmber of bones
@@ -59,7 +59,6 @@ for (let i = 0; i < position.count; i++) {
 
 	const skinIndex = Math.max(0, Math.floor(x / SEGMENT_WIDTH)); // get the skin index
 	let skinWeight = (x % SEGMENT_WIDTH) / SEGMENT_WIDTH; // get the skin weight
-	// You can push these values to skindIndexes and skinWeights if needed
 	skindIndexes.push(skinIndex, skinIndex + 1, 0, 0);
 	skinWeights.push(1 - skinWeight, skinWeight, 0, 0);
 }
@@ -140,6 +139,7 @@ export default function Page({
 					  }
 					: {
 							roughness: 0.1,
+							metalness: 0.5,
 					  }),
 				emissive: emissiveColor,
 				emissiveIntensity: 0,
@@ -153,6 +153,7 @@ export default function Page({
 					  }
 					: {
 							roughness: 0.1,
+							metalness: 0.2,
 					  }),
 				emissive: emissiveColor,
 				emissiveIntensity: 0,
