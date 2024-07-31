@@ -141,8 +141,8 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 						</a>
 					</div>
 					<div className='menu-item font-bold'>Issues</div>
-					<div className='menu-item font-bold'>Need to Buy</div>
-					<div className='menu-item font-bold'>Bat Services</div>
+					<div className='menu-item font-bold'>Report A Crime</div>
+					<div className='menu-item font-bold'>Batsignal Queue</div>
 				</div>
 			</div>
 		</>
