@@ -2,7 +2,7 @@
 
 ![Website Banner](https://via.placeholder.com/800x200?text=TysonSkakun.dev)
 
-[![Picture](https://ibb.co/yPSDwYL)](https://ibb.co/yPSDwYL)
+[![Picture](https://ibb.co/yPSDwYL)](https://bashify.io/i/rDmEiF)
 
 ## Live Demo
 
