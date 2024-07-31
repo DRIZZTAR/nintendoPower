@@ -140,7 +140,7 @@ export default function Page({
 					  }
 					: {
 							roughness: 0.1,
-							metalness: 0.5,
+							metalness: 0.3,
 					  }),
 				emissive: emissiveColor,
 				emissiveIntensity: 0,
