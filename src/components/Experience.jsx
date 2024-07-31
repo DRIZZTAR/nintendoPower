@@ -46,32 +46,37 @@ export const Experience = () => {
 				rotationIntensity={2}
 			>
 				{/* <PresentationControls
-          enabled={true} // the controls can be disabled by setting this to false
-          global={false} // Spin globally or by dragging the model
-          cursor={true} // Whether to toggle cursor style on drag
-          snap={true} // Snap-back to center (can also be a spring config)
-          speed={1.5} // Speed factor
-          rotation={[0, 0, 0]} // Default rotation
-          polar={[0, Math.PI / 1]} // Vertical limits
-          azimuth={[-Infinity, Infinity]} // Horizontal limits
-          config={{ mass: 1, tension: 170, friction: 45 }} // Spring config
-        > */}
-				<Book />
+					global
+					rotation={[0.13, 0.1, 0]}
+					polar={[-3.5, 3.5]}
+					azimuth={[-1, 1.75]}
+					config={{ mass: 2, tension: 400 }}
+					snap={{ mass: 4, tension: 400 }}
+				> */}
+				<Book position={[0, 0, 0]} />
+				<rectAreaLight
+					intensity={4}
+					width={1.0}
+					height={0.85}
+					color='#ff99ff'
+					position={[0, 0.55, -1.55]}
+					rotation={[0.1, Math.PI, 0]}
+				/>
 				{/* </PresentationControls> */}
 			</Float>
 			<OrbitControls
 				makeDefault
-				minDistance={1}
+				minDistance={2}
 				maxDistance={8}
 				enableZoom={true}
-				enablePan={false}
+				enablePan={true}
 			/>
 			{/* {showEnvironment &&  */}
-				<Environment preset='night' />
+			<Environment preset='apartment' />
 			{/* } */}
 			<directionalLight
 				position={[2, 5, 2]}
-				intensity={2}
+				intensity={1}
 				castShadow
 				shadow-mapSize-width={2048}
 				shadow-mapSize-height={2048}
@@ -79,7 +84,7 @@ export const Experience = () => {
 			/>
 			<mesh position-y={-1.5} rotation-x={-Math.PI / 2} receiveShadow>
 				<planeGeometry args={[100, 100]} />
-				<shadowMaterial transparent opacity={0.3} />
+				<shadowMaterial transparent opacity={0.09} />
 			</mesh>
 		</>
 	);

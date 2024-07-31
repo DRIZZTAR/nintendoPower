@@ -20,7 +20,7 @@ export const Book = ({ ...props }) => {
 							goToPage();
 						},
 						// if page count is greater than 2, set timeout to 50, else set it to 150
-						Math.abs(page - delayedPage) > 2 ? 50 : 150
+						Math.abs(page - delayedPage) > 2 ? 50 : 350
 					);
 					if (page > delayedPage) {
 						return delayedPage + 1;
