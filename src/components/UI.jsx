@@ -70,7 +70,7 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 
 	useEffect(() => {
 		const audio = new Audio('/audios/page-flip-01a.mp3');
-		audio.volume = 0.3;
+		audio.volume = 0.1;
 		audio.play();
 	}, [page]);
 
