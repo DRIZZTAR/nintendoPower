@@ -1,9 +1,13 @@
-# r3f-animated-book-slider-starter
+# r3f-animated-book-slider
 
-![YouTube Thumbnail](https://github.com/user-attachments/assets/c6b6ea2e-2643-4d53-89b7-ee5b848de06d)
+![Website Banner](https://via.placeholder.com/800x200?text=TysonSkakun.dev)
 
-[Video tutorial](https://youtu.be/b7a_Y1Ja6js)
+[![Picture](https://ibb.co/yPSDwYL)](https://ibb.co/yPSDwYL)
 
-[Live demo](https://r3f-animated-book-slider-final.vercel.app/)
+## Live Demo
 
-[Final code](https://github.com/wass08/r3f-animated-book-slider-final)
+Check out the [live demo](https://batman-omega.vercel.app/) of the project.
+
+## Final Code
+
+The final code is available on GitHub: [Final code](https://github.com/DRIZZTAR/nintendoPower)
