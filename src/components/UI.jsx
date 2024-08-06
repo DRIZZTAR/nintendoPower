@@ -41,6 +41,8 @@ pages.push({
 export const UI = ({ toggleEnvironment, showEnvironment }) => {
 	const [page, setPage] = useAtom(pageAtom);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [timerActive, setTimerActive] = useState(false);
+	const [timeLeft, setTimeLeft] = useState(60); // 60 seconds timer
 
 	const toggleMenu = () => {
 		setMenuOpen(!menuOpen);
@@ -48,6 +50,12 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 
 	const closeMenu = () => {
 		setMenuOpen(false);
+	};
+
+	const handleBatsignalQueue = () => {
+		setTimerActive(true);
+		setTimeLeft(60);
+		closeMenu();
 	};
 
 	useEffect(() => {
@@ -74,6 +82,19 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 		audio.play();
 	}, [page]);
 
+	useEffect(() => {
+		let timer;
+		if (timerActive && timeLeft > 0) {
+			timer = setInterval(() => {
+				setTimeLeft(prevTime => prevTime - 1);
+			}, 1000);
+		} else if (timeLeft === 0) {
+			setTimerActive(false);
+		}
+
+		return () => clearInterval(timer);
+	}, [timerActive, timeLeft]);
+
 	return (
 		<>
 			<main className='pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col'>
@@ -89,6 +110,11 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 					>
 						TysonSkakun.Dev
 					</a>
+					{timerActive && (
+						<div className='mt-4 text-xl font-thin'>
+							Batsignal Timer: {timeLeft}s
+						</div>
+					)}
 				</div>
 				<div className='w-full overflow-auto pointer-events-auto flex justify-center'>
 					<div className='overflow-auto flex items-center gap-4 max-w-full p-5'>
@@ -140,9 +166,36 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 							Hire Me
 						</a>
 					</div>
-					<div className='menu-item font-bold'>Issues</div>
-					<div className='menu-item font-bold'>Report A Crime</div>
-					<div className='menu-item font-bold'>Batsignal Queue</div>
+					<div className='menu-item font-extrabold'>
+						<a
+							href='https://link-to-the-past.vercel.app/'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							Super Nintendo Zelda Manual
+						</a>
+					</div>
+					<div className='menu-item font-extrabold'>
+						<a
+							href='https://nintendo-power-pokemon.vercel.app/'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							Nintendo Power Magazine
+						</a>
+					</div>
+					<div className='menu-item font-extrabold'>
+						<a
+							href='https://tysonskakun.dev/'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							Personal Site
+						</a>
+					</div>
+					<div className='menu-item font-bold' onClick={handleBatsignalQueue}>
+						Batsignal Queue
+					</div>
 				</div>
 			</div>
 		</>
