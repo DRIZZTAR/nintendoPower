@@ -159,11 +159,11 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 				<div className='menu-content p-10'>
 					<div className='menu-item font-extrabold'>
 						<a
-							href='https://www.linkedin.com/in/tyson-skakun-tail/'
+							href='https://vogue-silk.vercel.app/'
 							target='_blank'
 							rel='noopener noreferrer'
 						>
-							Hire Me
+							Vogue
 						</a>
 					</div>
 					<div className='menu-item font-extrabold'>
@@ -172,7 +172,7 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 							target='_blank'
 							rel='noopener noreferrer'
 						>
-							Super Nintendo Zelda Manual
+							Zelda Manual
 						</a>
 					</div>
 					<div className='menu-item font-extrabold'>
@@ -193,7 +193,10 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 							Personal Site
 						</a>
 					</div>
-					<div className='menu-item font-bold' onClick={handleBatsignalQueue}>
+					<div
+						className='menu-item font-bold'
+						onClick={handleBatsignalQueue}
+					>
 						Batsignal Queue
 					</div>
 				</div>

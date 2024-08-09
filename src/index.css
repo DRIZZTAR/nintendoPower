@@ -40,21 +40,25 @@ body {
 .hamburger div {
 	width: 100%;
 	height: 4px;
-	background-color: #333;
+	background: linear-gradient(100deg, #000000, #ffffff, #eb0089, #d4af95);
+	background-size: 400% 400%;
+	animation: gradientShift 18s ease infinite;
 	border-radius: 10px;
-	transition: all 0.3s ease;
+	transition: all 0.6s ease-in-out;
 }
 
 .hamburger.active div:nth-child(1) {
-	transform: translateY(10px) rotate(135deg);
+	transform: translateY(10px) rotate(-135deg) scale(0.75);
+
 }
 
 .hamburger.active div:nth-child(2) {
-	opacity: 0;
+	transform: translateY(7px) translateX(-5px) rotate(180deg) scale(0.9);
 }
 
 .hamburger.active div:nth-child(3) {
-	transform: translateY(-10px) rotate(-135deg);
+	transform: translateY(4px) translateX(0px) rotate(135deg) scale(0.75);
+
 }
 
 .menu {
@@ -65,18 +69,17 @@ body {
 	height: 100%;
 	background: linear-gradient(
 		270deg,
-		rgba(0, 0, 0, 0.8) 0%,
-		rgba(36, 36, 36, 1) 100%
+		rgba(128, 116, 116, 0.8) 0%,
+		rgb(80, 78, 77) 100%
 	);
-	box-shadow: -4px 0px 12px rgba(0, 0, 0, 0.3);
 	transform: translateX(100%);
-	transition: transform 0.3s ease-in-out;
-	z-index: 101;
-	pointer-events: auto; /* Ensure menu is interactive */
+	transition: transform 0.5s ease;
+	z-index: 99;
+	pointer-events: auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: center; /* Center the content vertically */
-	align-items: center; /* Center the content horizontally */
+	justify-content: center;
+	align-items: center;
 }
 
 .menu.active {
@@ -109,10 +112,10 @@ body {
 
 .menu-item {
 	cursor: pointer;
-	font-size: 1.2rem;
-	font-weight: 500;
+	font-size: 1.6rem;
+	font-weight: 300;
 	transition: color 0.3s ease;
-	text-align: center; /* Center text within each item */
+	text-align: center;
 }
 
 .menu-item:hover {
@@ -122,14 +125,13 @@ body {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-
 	.menu {
-		width: 40%;
+		width: 35%;
 		height: 100%;
 	}
 
 	.menu-content {
-		padding: 10px;
+		padding: 5px;
 	}
 
 	.menu-item {
