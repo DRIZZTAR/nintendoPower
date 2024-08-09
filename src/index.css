@@ -11,11 +11,11 @@
 
 body {
 	margin: 0;
-	background: radial-gradient(
+	/* background: radial-gradient(
 		ellipse at center,
 		rgb(0, 0, 0) 0%,
 		rgb(255, 255, 255) 70%
-	);
+	); */
 	font-family: 'Poppins', sans-serif;
 }
 
