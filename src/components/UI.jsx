@@ -168,6 +168,15 @@ export const UI = ({ toggleEnvironment, showEnvironment }) => {
 					</div>
 					<div className='menu-item font-extrabold'>
 						<a
+							href='https://dragon-ball-three.vercel.app/'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							DragonBall
+						</a>
+					</div>
+					<div className='menu-item font-extrabold'>
+						<a
 							href='https://link-to-the-past.vercel.app/'
 							target='_blank'
 							rel='noopener noreferrer'
